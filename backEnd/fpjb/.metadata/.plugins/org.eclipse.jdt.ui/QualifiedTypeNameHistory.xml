@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.example.demo.beans.Customer"/>
+    <fullyQualifiedTypeName name="java.time.LocalTime"/>
+    <fullyQualifiedTypeName name="org.apache.hadoop.hdfs.server.datanode.dataNodeHome_jsp"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.example.demo.dbdao.CustomerDBDAO"/>
+    <fullyQualifiedTypeName name="com.example.demo.CustomerTests"/>
+    <fullyQualifiedTypeName name="com.example.demo.beans.Coupon"/>
+    <fullyQualifiedTypeName name="com.example.demo.beans.CouponType"/>
+    <fullyQualifiedTypeName name="jnr.ffi.types.sa_family_t"/>
+    <fullyQualifiedTypeName name="javax.print.attribute.standard.MediaSize.ISO"/>
+    <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
+    <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat.ISO"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.junit.Test"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+</qualifiedTypeNameHistroy>

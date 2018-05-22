@@ -1,0 +1,126 @@
+package com.example.demo.RestControllers;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.beans.Coupon;
+import com.example.demo.beans.CouponType;
+import com.example.demo.facades.CompanyFacade;
+
+@RestController
+@RequestMapping("/company")
+public class CompanyController 
+{
+
+	@Autowired
+	private CompanyFacade companyFacade;
+
+	//----------------------------------------------------------------------------------------
+	@PostMapping(value="createCoupon" )
+	public ResponseEntity<Coupon> createCoupon(@RequestBody Coupon coupon)
+	{
+		//calling the facade to create the company
+		companyFacade.createCoupon(coupon);
+
+		//returning responseEntity with Created HttpStatus
+		return new ResponseEntity<Coupon>(HttpStatus.CREATED);	
+	}
+	//----------------------------------------------------------------------------------------
+	@DeleteMapping(value="deleteCoupon" )
+	public ResponseEntity<Coupon> deleteCoupon(@RequestBody Coupon coupon)
+	{
+		//calling the facade to delete the company
+		companyFacade.removeCoupon(coupon);
+
+		//returning responseEntity with Created HttpStatus
+		return new ResponseEntity<Coupon>(HttpStatus.OK);	
+
+	}
+	//----------------------------------------------------------------------------------------
+	@PutMapping(value="updateCoupon" )
+	public ResponseEntity<Coupon> updateCoupon(@RequestBody Coupon coupon)
+	{
+		//calling the facade to delete the company
+		companyFacade.updateCoupon(coupon);
+
+		//returning responseEntity with Created HttpStatus
+		return new ResponseEntity<Coupon>(HttpStatus.OK);	
+
+	}
+	//----------------------------------------------------------------------------------------
+	@GetMapping(value="getCoupon/{id}")
+	public ResponseEntity<Coupon> getCoupon(@PathVariable int id)
+	{
+
+		Coupon tempCoupon = companyFacade.getCoupon(id);
+
+		if(tempCoupon == null)
+			return new ResponseEntity<Coupon>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Coupon>(tempCoupon , HttpStatus.OK);
+
+	}
+	//----------------------------------------------------------------------------------------
+	@GetMapping(value="getAllCoupons")
+	public ResponseEntity<List<Coupon>> getAllCoupons()
+	{
+
+		List<Coupon> allCoupons =  (List<Coupon>) companyFacade.getAllCoupon();
+
+		if(allCoupons == null)
+			return new ResponseEntity<List<Coupon>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Coupon>>(allCoupons , HttpStatus.OK);	
+	}
+	//----------------------------------------------------------------------------------------
+	@GetMapping(value="getAllCouponsByCouponType/{couponType}")
+	public ResponseEntity<List<Coupon>> getAllCouponsByType(@PathVariable CouponType couponType)
+	{
+
+		List<Coupon> allCoupons =  (List<Coupon>) companyFacade.getCouponByType(couponType);
+
+		if(allCoupons == null)
+		{
+			System.out.println("logged in to allCouponsNull");
+			return new ResponseEntity<List<Coupon>>(HttpStatus.NO_CONTENT);
+		}
+		System.out.println("out allCouponsNull");
+		System.out.println(allCoupons);
+
+		return new ResponseEntity<List<Coupon>>(allCoupons , HttpStatus.OK);	
+	}
+	//----------------------------------------------------------------------------------------
+	@GetMapping(value="getAllCouponsbyPrice/{price}")
+	public ResponseEntity<List<Coupon>> getAllCouponsByPrice(@PathVariable int price)
+	{
+
+		List<Coupon> allCoupons = (List<Coupon>) companyFacade.getCouponByPrice(price);
+
+		if(allCoupons == null)
+			return new ResponseEntity<List<Coupon>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Coupon>>(allCoupons , HttpStatus.OK);	
+	}	
+	//----------------------------------------------------------------------------------------
+	@GetMapping(value="getAllCouponsByDate/{date}LocalDate")
+	public ResponseEntity<List<Coupon>> getAllCouponsByDate(@PathVariable LocalDate date)
+	{
+		LocalDate tempDate = date;
+		List<Coupon> allCoupons = (List<Coupon>) companyFacade.getCouponByDate(tempDate);
+
+		//ArrayList<Coupon> allCoupons = (ArrayList<Coupon>) companyFacade.getCouponByDate(date);
+
+		if(allCoupons == null)
+			return new ResponseEntity<List<Coupon>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Coupon>>(allCoupons , HttpStatus.OK);	
+	}
+}
